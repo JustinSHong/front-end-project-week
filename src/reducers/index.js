@@ -1,5 +1,8 @@
 // action types
 import {
+    FETCHING_TODOS,
+    FETCH_TODOS,
+    FETCH_TODOS_ERROR,
     ADDING_TODO,
     ADDTODO,
     ADDTODO_ERROR,
@@ -22,6 +25,20 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+        // fetching a todo
+        case FETCHING_TODOS:
+            return Object.assign({}, state, { status: "FETCHING TODOS" });
+        // fetch todo
+        case FETCH_TODOS:
+            return Object.assign({}, state, {
+                status: "FETCH TODO",
+                todos: [...state.todos, action.payload]
+            });
+        // failure to fetch todo
+        case FETCH_TODOS_ERROR:
+            return Object.assign({}, state, {
+                status: "FETCHING TODO ERROR"
+            });
         // adding a todo
         case ADDING_TODO:
             return Object.assign({}, state, { status: "ADDING NEW TODO" });
