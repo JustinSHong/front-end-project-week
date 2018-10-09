@@ -3,7 +3,9 @@ import axios from "axios";
 export const ADDING_TODO = "ADDING_TODO";
 export const ADDTODO = "ADDTODO";
 export const ADDTODO_ERROR = "ADDTODO_ERROR";
+export const DELETING_TODO = "DELETING_TODO";
 export const DELETETODO = "DELETETODO";
+export const DELETETODO_ERROR = "DELETETODO_ERROR";
 export const UPDATETODO = "UPDATETODO";
 export const TOGGLETODO = "TOGGLETODO";
 export const ARCHIVETODO = "ARCHIVETODO";
@@ -58,12 +60,22 @@ export function toggleTodo(id) {
     };
 }
 
-export function deleteTodo(id) {
-    return {
-        type: DELETETODO,
-        payload: id
-    };
-}
+export const deleteTodo = id => dispatch => {
+    dispatch({ type: DELETING_TODO });
+    axios
+        .delete(`${url}/api/notes/${id}`)
+        .then(res => {
+            dispatch({
+                type: DELETETODO,
+                payload: id
+            });
+        })
+        .catch(() => {
+            dispatch({
+                type: DELETETODO_ERROR
+            });
+        });
+};
 
 export function updateTodo(id, title, text) {
     return {
