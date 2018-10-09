@@ -1,6 +1,8 @@
 // action types
 import {
+    ADDING_TODO,
     ADDTODO,
+    ADDTODO_ERROR,
     DELETETODO,
     UPDATETODO,
     TOGGLETODO,
@@ -10,56 +12,7 @@ import {
 let uuid = require("uuid-v4");
 
 const initialState = {
-    todos: [
-        {
-            title: "Do Dishes",
-            text: "do dishes before going to bed",
-            isComplete: false,
-            id: uuid(),
-            archive: false,
-            listify: false
-        },
-        {
-            title: "Walk Dog",
-            text: "walk the dog after dinner",
-            isComplete: false,
-            id: uuid(),
-            archive: false,
-            listify: false
-        },
-        {
-            title: "Clean Room",
-            text: "vacuum carpet and clean up toys",
-            isComplete: false,
-            id: uuid(),
-            archive: false,
-            listify: false
-        },
-        {
-            title: "Groceries",
-            text: "get some milk and cereal",
-            isComplete: false,
-            id: uuid(),
-            archive: false,
-            listify: false
-        },
-        {
-            title: "Dinner with Max",
-            text: "meet Max in downtown for dinner at 7",
-            isComplete: false,
-            id: uuid(),
-            archive: false,
-            listify: false
-        },
-        {
-            title: "Fix bike",
-            text: "replace flat tire",
-            isComplete: false,
-            id: uuid(),
-            archive: false,
-            listify: false
-        }
-    ],
+    todos: [],
     status: "",
     filter: "",
     searchText: ""
@@ -67,12 +20,18 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+        // adding a todo
+        case ADDING_TODO:
+            return Object.assign({}, state, { status: "ADDING NEW TODO" });
         // add new todo
         case ADDTODO:
             return Object.assign({}, state, {
                 todos: [...state.todos, action.payload],
-                status: "ADDING NEW TODO"
+                status: "ADDED TODO"
             });
+        // failure to add todo
+        case ADDTODO_ERROR:
+            return Object.assign({}, state, { status: "ADD TODO ERROR" });
         // edit new todo
         case UPDATETODO:
             state.todos[parseInt(action.payload.id, 10)].title =
