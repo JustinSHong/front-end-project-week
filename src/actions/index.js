@@ -1,5 +1,6 @@
 import axios from "axios";
 // action types
+export const ADDING_TODO = "ADDING_TODO";
 export const ADDTODO = "ADDTODO";
 export const ADDTODO_ERROR = "ADDTODO_ERROR";
 export const DELETETODO = "DELETETODO";
@@ -21,6 +22,7 @@ const url = process.env.REACT_APP_SERVER;
 
 // action creators
 export const addTodo = (title, text) => dispatch => {
+    dispatch({ type: ADDING_TODO });
     axios
         .post(`${url}/api/notes`, { title: title, content: text })
         .then(res => {
