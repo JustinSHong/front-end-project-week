@@ -1,5 +1,8 @@
 import axios from "axios";
 // action types
+export const FETCHING_TODOS = "FETCHING_TODOS";
+export const FETCH_TODOS = "FETCH_TODOS";
+export const FETCH_TODOS_ERROR = "FETCH_TODOS_ERROR";
 export const ADDING_TODO = "ADDING_TODO";
 export const ADDTODO = "ADDTODO";
 export const ADDTODO_ERROR = "ADDTODO_ERROR";
@@ -23,6 +26,22 @@ let uuid = require("uuid-v4");
 const url = process.env.REACT_APP_SERVER;
 
 // action creators
+export const fetchTodos = () => dispatch => {
+    dispatch({ type: FETCHING_TODOS });
+    axios
+        .get(`${url}/api/notes`)
+        .then(res => {
+            console.log(`FETCHING TODO RESPONSE ${res}`);
+            dispatch({
+                type: FETCH_TODOS,
+                payload: res.data
+            });
+        })
+        .catch(() => {
+            dispatch({ type: FETCH_TODOS_ERROR });
+        });
+};
+
 export const addTodo = (title, text) => dispatch => {
     dispatch({ type: ADDING_TODO });
     axios
