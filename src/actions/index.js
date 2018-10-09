@@ -45,16 +45,22 @@ export const fetchTodos = () => dispatch => {
 export const addTodo = (title, text) => dispatch => {
     dispatch({ type: ADDING_TODO });
     axios
-        .post(`${url}/api/notes`, { title: title, content: text })
+        .post(`${url}/api/notes`, {
+            title: title,
+            content: text,
+            isComplete: false,
+            id: uuid(),
+            archive: false
+        })
         .then(res => {
             dispatch({
                 type: ADDTODO,
                 payload: {
                     title: res.data.title,
                     text: res.data.content,
-                    isComplete: false,
-                    id: uuid(),
-                    archive: false
+                    isComplete: res.data.isComplete,
+                    id: res.data.id,
+                    archive: res.data.archive
                 }
             });
         })
