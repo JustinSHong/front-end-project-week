@@ -20,7 +20,7 @@ let uuid = require("uuid-v4");
 const url = process.env.REACT_APP_SERVER;
 
 // action creators
-export function addTodo(title, text) {
+export const addTodo = (title, text) => dispatch => {
     axios
         .post(`${url}/api/notes`, { title: title, content: text })
         .then(res => {
@@ -40,7 +40,7 @@ export function addTodo(title, text) {
                 type: ADDTODO_ERROR
             });
         });
-}
+};
 
 export function archiveTodo(id) {
     return {
