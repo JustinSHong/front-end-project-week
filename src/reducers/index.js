@@ -3,7 +3,9 @@ import {
     ADDING_TODO,
     ADDTODO,
     ADDTODO_ERROR,
+    DELETING_TODO,
     DELETETODO,
+    DELETETODO_ERROR,
     UPDATETODO,
     TOGGLETODO,
     ARCHIVETODO
@@ -42,6 +44,9 @@ const rootReducer = (state = initialState, action) => {
                 todos: state.todos,
                 status: "UPDATING A TODO"
             });
+        // deleting a todo
+        case DELETING_TODO:
+            return Object.assign({}, state, { status: "DELETING A TODO" });
         // delete new todo
         case DELETETODO:
             return Object.assign({}, state, {
@@ -50,6 +55,9 @@ const rootReducer = (state = initialState, action) => {
                 }),
                 status: "DELETING A TODO"
             });
+        // failure to delete todo
+        case DELETETODO_ERROR:
+            return Object.assign({}, state, { status: "DELETE TODO ERROR" });
         // change a todo's completion status
         case TOGGLETODO:
             console.log("ACTION.PAYLOAD: ", action.payload);
