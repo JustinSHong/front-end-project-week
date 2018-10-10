@@ -32,7 +32,7 @@ const rootReducer = (state = initialState, action) => {
         case FETCH_TODOS:
             return Object.assign({}, state, {
                 status: "FETCH TODO",
-                todos: [...state.todos, action.payload]
+                todos: state.todos.concat(action.payload)
             });
         // failure to fetch todo
         case FETCH_TODOS_ERROR:
