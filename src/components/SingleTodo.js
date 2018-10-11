@@ -75,16 +75,7 @@ class SingleTodo extends React.Component {
                                 : "none"
                         }}
                     >
-                        {/* render a list if listify is true for a todo */}
-                        {this.props.todo.listify ? (
-                            <ul>
-                                {this.props.todo.text.split("\n").map(line => {
-                                    return <li>{line}</li>;
-                                })}
-                            </ul>
-                        ) : (
-                            this.props.todo.text
-                        )}
+                        {this.props.todo.content}
                     </p>
                     <IconButton
                         onClick={this.handleClick}
