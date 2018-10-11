@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 // styles
 import "./styles/App.css";
 import "./styles/animation.css";
@@ -42,7 +43,9 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    { fetchTodos }
-)(App);
+export default withRouter(
+    connect(
+        mapStateToProps,
+        { fetchTodos }
+    )(App)
+);
