@@ -66,7 +66,11 @@ class Todo extends Component {
     render() {
         const { id } = this.props.match.params;
         const { classes } = this.props;
-        const { todo } = this.props.todos[parseInt(id, 10)];
+        const todo = this.props.todos[parseInt(id, 10)];
+        console.log(
+            `CURRENT TODO ${JSON.stringify(this.props.todos[parseInt(id, 10)])}`
+        );
+
         return [
             <div className="fade" style={{ marginTop: "70px" }}>
                 {/* Delete Modal */}
