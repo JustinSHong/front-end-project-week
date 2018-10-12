@@ -57,7 +57,7 @@ export const addTodo = (title, text) => dispatch => {
                 type: ADDTODO,
                 payload: {
                     title: res.data.title,
-                    text: res.data.content,
+                    content: res.data.content,
                     isComplete: res.data.isComplete,
                     id: res.data.id,
                     archive: res.data.archive
