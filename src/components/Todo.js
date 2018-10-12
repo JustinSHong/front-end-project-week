@@ -66,7 +66,7 @@ class Todo extends Component {
     render() {
         const { id } = this.props.match.params;
         const { classes } = this.props;
-
+        const { todo } = this.props.todos[parseInt(id, 10)];
         return [
             <div className="fade" style={{ marginTop: "70px" }}>
                 {/* Delete Modal */}
@@ -83,7 +83,7 @@ class Todo extends Component {
                         <Button
                             onClick={() => {
                                 this.handleClose();
-                                this.handleDeleteTodo(id);
+                                this.handleDeleteTodo(todo._id);
                             }}
                             className={classes.deleteBtn}
                             color="secondary"
