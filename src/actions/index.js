@@ -55,13 +55,7 @@ export const addTodo = (title, text) => dispatch => {
         .then(res => {
             dispatch({
                 type: ADDTODO,
-                payload: {
-                    title: res.data.title,
-                    content: res.data.content,
-                    isComplete: res.data.isComplete,
-                    id: res.data.id,
-                    archive: res.data.archive
-                }
+                payload: res.data
             });
         })
         .catch(() => {
