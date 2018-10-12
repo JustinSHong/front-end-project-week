@@ -30,8 +30,8 @@ class SingleTodo extends React.Component {
         this.props.toggleTodo(id);
     };
     // delete a todo
-    handleDeleteTodo = index => {
-        this.props.deleteTodo(index);
+    handleDeleteTodo = id => {
+        this.props.deleteTodo(id);
     };
     // archive a todo
     handleArchiveTodo = id => {
@@ -47,7 +47,7 @@ class SingleTodo extends React.Component {
     };
 
     render() {
-        const { id } = this.props.todo;
+        const { _id } = this.props.todo;
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         const { classes } = this.props;
@@ -68,7 +68,7 @@ class SingleTodo extends React.Component {
                 >
                     <p
                         className="SingleTodo_content"
-                        onClick={() => this.handleToggleTodo(id)}
+                        // onClick={() => this.handleToggleTodo(id)}
                         style={{
                             textDecoration: this.props.todo.isComplete
                                 ? "line-through"
@@ -107,7 +107,7 @@ class SingleTodo extends React.Component {
                         <MenuItem
                             className={classes.menuItem}
                             onClick={() => {
-                                this.handleDeleteTodo(this.props.index);
+                                this.handleDeleteTodo(_id);
                                 this.props.handleClick(
                                     "Item removed from list"
                                 );
@@ -118,7 +118,7 @@ class SingleTodo extends React.Component {
                         <MenuItem
                             className={classes.menuItem}
                             onClick={() => {
-                                this.handleArchiveTodo(id);
+                                // this.handleArchiveTodo(id);
                                 this.props.handleClick("Archived item");
                             }}
                         >
