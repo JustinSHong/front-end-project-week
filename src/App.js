@@ -30,7 +30,11 @@ class App extends Component {
                     <Route exact path="/" component={VisibilityTodos} />
                     <Route exact path="/addTodo" component={CreateTodoForm} />
                     <Route exact path="/todo/:id" component={Todo} />
-                    <Route exact path="/editTodo" component={EditTodoForm} />
+                    <Route
+                        exact
+                        path="/editTodo/:id"
+                        component={EditTodoForm}
+                    />
                 </div>
             </div>
         );
