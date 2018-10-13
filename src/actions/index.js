@@ -9,7 +9,9 @@ export const ADDTODO_ERROR = "ADDTODO_ERROR";
 export const DELETING_TODO = "DELETING_TODO";
 export const DELETETODO = "DELETETODO";
 export const DELETETODO_ERROR = "DELETETODO_ERROR";
+export const UPDATING_TODO = "UPDATING_TODO";
 export const UPDATETODO = "UPDATETODO";
+export const UPDATETODO_ERROR = "UPDATETODO_ERROR";
 export const TOGGLETODO = "TOGGLETODO";
 export const ARCHIVETODO = "ARCHIVETODO";
 // filter types
@@ -96,13 +98,12 @@ export const deleteTodo = id => dispatch => {
         });
 };
 
-export function updateTodo(id, title, text) {
+export function updateTodo(title, text) {
     return {
         type: UPDATETODO,
         payload: {
             title: title,
-            text: text,
-            id: id
+            text: text
         }
     };
 }
