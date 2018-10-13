@@ -9,7 +9,9 @@ import {
     DELETING_TODO,
     DELETETODO,
     DELETETODO_ERROR,
+    UPDATING_TODO,
     UPDATETODO,
+    UPDATETODO_ERROR,
     TOGGLETODO,
     ARCHIVETODO
 } from "../actions/index.js";
@@ -51,6 +53,11 @@ const rootReducer = (state = initialState, action) => {
         // failure to add todo
         case ADDTODO_ERROR:
             return Object.assign({}, state, { status: "ADD TODO ERROR" });
+        // editing a todo
+        case UPDATING_TODO:
+            return Object.assign({}, state, {
+                status: "UPDATING_TODO"
+            });
         // edit new todo
         case UPDATETODO:
             state.todos[parseInt(action.payload.id, 10)].title =
