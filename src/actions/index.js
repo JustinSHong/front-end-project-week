@@ -98,7 +98,7 @@ export const deleteTodo = id => dispatch => {
         });
 };
 
-export function updateTodo(id, title, text) {
+export const updateTodo = (id, title, text) => dispatch => {
     dispatch({ type: UPDATING_TODO });
     axios
         .put(`${url}/api/notes/${id}`, {
@@ -116,7 +116,7 @@ export function updateTodo(id, title, text) {
                 type: UPDATETODO_ERROR
             });
         });
-}
+};
 
 export function setVisibilityFilter(filter, text = "") {
     return {
