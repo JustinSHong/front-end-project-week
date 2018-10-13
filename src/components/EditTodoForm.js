@@ -47,9 +47,9 @@ class EditTodoForm extends Component {
         this.setState({ [e.target.name]: e.target.value });
     };
     // update an existing todo
-    handleUpdateTodo = id => {
+    handleUpdateTodo = () => {
         const { title, text } = this.state;
-        this.props.updateTodo(id, title, text);
+        this.props.updateTodo(title, text);
         this.setState({ title: "", text: "" });
     };
     // listify a todos text content
@@ -60,17 +60,16 @@ class EditTodoForm extends Component {
     };
 
     render() {
-        const { id } = this.props.location.state;
         const { classes } = this.props;
+        console.log(`EDIT TODO PROPS ${JSON.stringify(this.props)}`);
 
         return (
             <div className="EditTodoFormContainer fade">
                 <h3 className="EditTodoForm_header">Edit Note:</h3>
-                <form classSName="EditTodoForm_form">
+                <form className="EditTodoForm_form">
                     <Input
                         className={classes.editNoteInput}
                         name="title"
-                        placeholder={this.props.todos[parseInt(id, 10)].title}
                         value={this.state.title}
                         disableUnderline={true}
                         onChange={this.handleNewInput}
@@ -78,7 +77,6 @@ class EditTodoForm extends Component {
                     <Input
                         className={classes.editNoteInput}
                         name="text"
-                        placeholder={this.props.todos[parseInt(id, 10)].text}
                         value={this.state.text}
                         multiline
                         rows="10"
@@ -90,7 +88,7 @@ class EditTodoForm extends Component {
                             variant="contained"
                             className={classes.button}
                             onClick={() => {
-                                this.handleUpdateTodo(id);
+                                this.handleUpdateTodo();
                             }}
                         >
                             Edit Your Note
