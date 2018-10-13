@@ -98,14 +98,24 @@ export const deleteTodo = id => dispatch => {
         });
 };
 
-export function updateTodo(title, text) {
-    return {
-        type: UPDATETODO,
-        payload: {
+export function updateTodo(id, title, text) {
+    dispatch({ type: UPDATING_TODO });
+    axios
+        .put(`${url}/api/notes/${id}`, {
             title: title,
-            text: text
-        }
-    };
+            content: text
+        })
+        .then(res => {
+            dispatch({
+                type: UPDATETODO,
+                payload: res.data
+            });
+        })
+        .catch(() => {
+            dispatch({
+                type: UPDATETODO_ERROR
+            });
+        });
 }
 
 export function setVisibilityFilter(filter, text = "") {
