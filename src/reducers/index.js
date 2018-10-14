@@ -81,8 +81,8 @@ const rootReducer = (state = initialState, action) => {
         // delete new todo
         case DELETETODO:
             return Object.assign({}, state, {
-                todos: state.todos.filter((todo, index) => {
-                    return index !== parseInt(action.payload, 10);
+                todos: state.todos.filter(todo => {
+                    return todo._id !== action.payload;
                 }),
                 status: "DELETING A TODO"
             });

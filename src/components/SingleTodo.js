@@ -103,7 +103,9 @@ class SingleTodo extends React.Component {
                         <MenuItem
                             className={classes.menuItem}
                             onClick={() => {
-                                this.handleDeleteTodo(index);
+                                this.handleDeleteTodo(
+                                    this.props.todos[parseInt(index, 10)]._id
+                                );
                                 this.props.handleClick(
                                     "Item removed from list"
                                 );

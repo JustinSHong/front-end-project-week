@@ -18,6 +18,7 @@ class Todos extends Component {
             open: false
         };
     }
+
     // snackbar handlers
     handleClick = msg => {
         this.setState({
