@@ -108,7 +108,11 @@ export const updateTodo = (id, title, text) => dispatch => {
         .then(res => {
             dispatch({
                 type: UPDATETODO,
-                payload: res.data
+                payload: {
+                    id: res.data._id,
+                    title: title,
+                    text: text
+                }
             });
         })
         .catch(() => {

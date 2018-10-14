@@ -60,11 +60,12 @@ const rootReducer = (state = initialState, action) => {
             });
         // edit new todo
         case UPDATETODO:
+            const { title, text } = action.payload;
             return Object.assign({}, state, {
                 todos: state.todos.map(todo => {
-                    if (action.payload._id === todo._id) {
-                        todo.text = action.payload.text;
-                        todo.content = action.payload.content;
+                    if (action.payload.id === todo._id) {
+                        todo.title = title;
+                        todo.content = text;
                     }
                     return todo;
                 }),
