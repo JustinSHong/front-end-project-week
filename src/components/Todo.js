@@ -67,9 +67,6 @@ class Todo extends Component {
         const { id } = this.props.match.params;
         const { classes } = this.props;
         const todo = this.props.todos[parseInt(id, 10)];
-        console.log(
-            `CURRENT TODO ${JSON.stringify(this.props.todos[parseInt(id, 10)])}`
-        );
 
         return [
             <div className="fade" style={{ marginTop: "70px" }}>
@@ -106,10 +103,7 @@ class Todo extends Component {
                 <div className="Todo_button_container">
                     <Link
                         to={{
-                            pathname: "/editTodo",
-                            state: {
-                                id: id
-                            }
+                            pathname: `/editTodo/${id}`
                         }}
                         style={{ textDecoration: "none" }}
                     >
@@ -138,7 +132,7 @@ class Todo extends Component {
                             className="Todo_text"
                             onClick={() => this.handleComplete(id)}
                         >
-                            {this.props.todos[id].text}
+                            {this.props.todos[id].content}
                         </p>
                     </Paper>
                 ) : (
