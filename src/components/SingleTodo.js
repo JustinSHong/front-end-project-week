@@ -47,18 +47,14 @@ class SingleTodo extends React.Component {
     };
 
     render() {
-        const { _id } = this.props.todo;
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
-        const { classes } = this.props;
+        const { classes, index } = this.props;
 
         return [
             <Card className="SingleTodo">
-                <Link
-                    className="SingleTodo_link"
-                    to={`/todo/${this.props.index}`}
-                >
-                    <h3>{this.props.todo.title}</h3>
+                <Link className="SingleTodo_link" to={`/todo/${index}`}>
+                    <h3>{this.props.todos[parseInt(index, 10)].title}</h3>
                 </Link>
                 <CardContent
                     style={{
@@ -70,12 +66,12 @@ class SingleTodo extends React.Component {
                         className="SingleTodo_content"
                         // onClick={() => this.handleToggleTodo(id)}
                         style={{
-                            textDecoration: this.props.todo.isComplete
+                            textDecoration: this.props.todos[index].isComplete
                                 ? "line-through"
                                 : "none"
                         }}
                     >
-                        {this.props.todo.content}
+                        {this.props.todos[parseInt(index, 10)].content}
                     </p>
                     <IconButton
                         onClick={this.handleClick}
@@ -107,7 +103,7 @@ class SingleTodo extends React.Component {
                         <MenuItem
                             className={classes.menuItem}
                             onClick={() => {
-                                this.handleDeleteTodo(_id);
+                                this.handleDeleteTodo(index);
                                 this.props.handleClick(
                                     "Item removed from list"
                                 );
@@ -131,7 +127,13 @@ class SingleTodo extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        todos: state.todos
+    };
+};
+
 export default connect(
-    null,
+    mapStateToProps,
     { toggleTodo, deleteTodo, archiveTodo }
 )(withStyles(styles)(SingleTodo));
