@@ -47,6 +47,7 @@ class Todos extends Component {
                         <SingleTodo
                             key={todo._id}
                             index={index}
+                            todo={todo}
                             handleClick={this.handleClick}
                         />
                     );

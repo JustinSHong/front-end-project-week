@@ -35,7 +35,6 @@ class SingleTodo extends React.Component {
     };
     // archive a todo
     handleArchiveTodo = (id, status) => {
-        console.log(`AT HANDLEARCHIVETODO() ${id} ${status}`);
         this.props.archiveTodo(id, status);
     };
     // open menu
@@ -50,9 +49,7 @@ class SingleTodo extends React.Component {
     render() {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
-        const { classes, index } = this.props;
-        const todo = this.props.todos[index];
-
+        const { classes, index, todo } = this.props;
         return [
             <Card className="SingleTodo">
                 <Link className="SingleTodo_link" to={`/todo/${index}`}>
