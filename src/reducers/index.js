@@ -13,7 +13,9 @@ import {
     UPDATETODO,
     UPDATETODO_ERROR,
     TOGGLETODO,
-    ARCHIVETODO
+    ARCHIVING_TODO,
+    ARCHIVETODO,
+    ARCHIVETODO_ERROR
 } from "../actions/index.js";
 
 let uuid = require("uuid-v4");
@@ -104,18 +106,24 @@ const rootReducer = (state = initialState, action) => {
                 }),
                 status: "TOGGLED A TODO"
             });
+        // archiving a todo
+        case ARCHIVING_TODO:
+            return Object.assign({}, state, { status: "ARCHIVING A TODO" });
         case ARCHIVETODO:
             return Object.assign({}, state, {
                 todos: state.todos.map(todo => {
-                    if (todo.id === action.payload) {
+                    if (todo.id === action.payload.id) {
                         return Object.assign({}, todo, {
-                            archive: !todo.archive
+                            archive: action.payload.status
                         });
                     }
                     return todo;
                 }),
                 status: "ARCHIVED A TODO"
             });
+        // failure to archive todo
+        case ARCHIVETODO_ERROR:
+            return Object.assign({}, state, { status: "ARCHIVE TODO ERROR" });
         // change filter status of the app
         case "SET_VISIBILITY_FILTER":
             return Object.assign({}, state, {
