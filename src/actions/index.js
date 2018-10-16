@@ -73,14 +73,14 @@ export const archiveTodo = (id, status) => dispatch => {
     dispatch({ type: ARCHIVING_TODO });
     axios
         .put(`${url}/api/notes/${id}`, {
-            archive: status
+            archive: !status
         })
         .then(res => {
             dispatch({
                 type: ARCHIVETODO,
                 payload: {
                     id: id,
-                    status: status
+                    status: !status
                 }
             });
         })

@@ -34,8 +34,9 @@ class SingleTodo extends React.Component {
         this.props.deleteTodo(id);
     };
     // archive a todo
-    handleArchiveTodo = id => {
-        this.props.archiveTodo(id);
+    handleArchiveTodo = (id, status) => {
+        console.log(`AT HANDLEARCHIVETODO() ${id} ${status}`);
+        this.props.archiveTodo(id, status);
     };
     // open menu
     handleClick = event => {
@@ -50,11 +51,12 @@ class SingleTodo extends React.Component {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         const { classes, index } = this.props;
+        const todo = this.props.todos[index];
 
         return [
             <Card className="SingleTodo">
                 <Link className="SingleTodo_link" to={`/todo/${index}`}>
-                    <h3>{this.props.todos[parseInt(index, 10)].title}</h3>
+                    <h3>{todo.title}</h3>
                 </Link>
                 <CardContent
                     style={{
@@ -66,12 +68,12 @@ class SingleTodo extends React.Component {
                         className="SingleTodo_content"
                         // onClick={() => this.handleToggleTodo(id)}
                         style={{
-                            textDecoration: this.props.todos[index].isComplete
+                            textDecoration: todo.isComplete
                                 ? "line-through"
                                 : "none"
                         }}
                     >
-                        {this.props.todos[parseInt(index, 10)].content}
+                        {todo.content}
                     </p>
                     <IconButton
                         onClick={this.handleClick}
@@ -103,9 +105,7 @@ class SingleTodo extends React.Component {
                         <MenuItem
                             className={classes.menuItem}
                             onClick={() => {
-                                this.handleDeleteTodo(
-                                    this.props.todos[parseInt(index, 10)]._id
-                                );
+                                this.handleDeleteTodo(todo._id);
                                 this.props.handleClick(
                                     "Item removed from list"
                                 );
@@ -116,7 +116,7 @@ class SingleTodo extends React.Component {
                         <MenuItem
                             className={classes.menuItem}
                             onClick={() => {
-                                // this.handleArchiveTodo(id);
+                                this.handleArchiveTodo(todo._id, todo.archive);
                                 this.props.handleClick("Archived item");
                             }}
                         >

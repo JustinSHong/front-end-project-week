@@ -112,7 +112,7 @@ const rootReducer = (state = initialState, action) => {
         case ARCHIVETODO:
             return Object.assign({}, state, {
                 todos: state.todos.map(todo => {
-                    if (todo.id === action.payload.id) {
+                    if (todo._id === action.payload.id) {
                         return Object.assign({}, todo, {
                             archive: action.payload.status
                         });
