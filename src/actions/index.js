@@ -73,7 +73,7 @@ export const archiveTodo = (id, status) => dispatch => {
     dispatch({ type: ARCHIVING_TODO });
     axios
         .put(`${url}/api/notes/${id}`, {
-            isComplete: status
+            archive: status
         })
         .then(res => {
             dispatch({
