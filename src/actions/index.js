@@ -78,7 +78,10 @@ export const archiveTodo = (id, status) => dispatch => {
         .then(res => {
             dispatch({
                 type: ARCHIVETODO,
-                payload: status
+                payload: {
+                    id: id,
+                    status: status
+                }
             });
         })
         .catch(() => {
