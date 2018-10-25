@@ -8,6 +8,7 @@ import "./styles/animation.css";
 // action
 import { fetchTodos } from "./actions";
 // components
+import Auth from "./components/Auth/Auth";
 import CreateTodoForm from "./components/CreateTodoForm";
 import ControlPanel from "./components/ControlPanel";
 import Todo from "./components/Todo";
@@ -35,6 +36,7 @@ class App extends Component {
                         path="/editTodo/:id"
                         component={EditTodoForm}
                     />
+                    <Route exact path="/auth" component={Auth} />
                 </div>
             </div>
         );
