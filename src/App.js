@@ -24,7 +24,8 @@ class App extends Component {
     render() {
         return (
             <div className="App fade">
-                <div className="ControlPanel">
+                <Route exact path="/auth" component={Auth} />
+                {/* <div className="ControlPanel">
                     <ControlPanel />
                 </div>
                 <div className="TodoContainer">
@@ -36,8 +37,8 @@ class App extends Component {
                         path="/editTodo/:id"
                         component={EditTodoForm}
                     />
-                    <Route exact path="/auth" component={Auth} />
-                </div>
+                    
+                </div> */}
             </div>
         );
     }
