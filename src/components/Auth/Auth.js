@@ -8,6 +8,7 @@ class Auth extends Component {
     render() {
         return (
             <div className="AuthContainer">
+                <h1 className="AuthForm_header">Log In or Sign Up!</h1>
                 {/* Sign In/ Sign up form here */}
                 <LogIn />
             </div>
