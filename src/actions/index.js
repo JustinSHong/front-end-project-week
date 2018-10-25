@@ -12,10 +12,12 @@ export const DELETETODO_ERROR = "DELETETODO_ERROR";
 export const UPDATING_TODO = "UPDATING_TODO";
 export const UPDATETODO = "UPDATETODO";
 export const UPDATETODO_ERROR = "UPDATETODO_ERROR";
-export const TOGGLETODO = "TOGGLETODO";
 export const ARCHIVING_TODO = "ARCHIVING_TODO";
 export const ARCHIVETODO = "ARCHIVETODO";
 export const ARCHIVETODO_ERROR = "ARCHIVETODO_ERROR";
+export const COMPLETING_TODO = "COMPLETING_TODO";
+export const COMPLETETODO = "COMPLETETODO";
+export const COMPLETETODO_ERROR = "COMPLETETODO_ERROR";
 // filter types
 export const VisibilityFilters = {
     SHOW_ALL_TODOS: "ALL_TODOS",
@@ -91,12 +93,27 @@ export const archiveTodo = (id, status) => dispatch => {
         });
 };
 
-export function toggleTodo(id) {
-    return {
-        type: TOGGLETODO,
-        payload: id
-    };
-}
+export const completeTodo = (id, status) => dispatch => {
+    dispatch({ type: COMPLETING_TODO });
+    axios
+        .put(`${url}/api/notes/${id}`, {
+            isComplete: status
+        })
+        .then(res => {
+            dispatch({
+                type: COMPLETETODO,
+                payload: {
+                    id: id,
+                    status: !status
+                }
+            });
+        })
+        .catch(() => {
+            dispatch({
+                type: COMPLETETODO_ERROR
+            });
+        });
+};
 
 export const deleteTodo = id => dispatch => {
     dispatch({ type: DELETING_TODO });

@@ -12,10 +12,12 @@ import {
     UPDATING_TODO,
     UPDATETODO,
     UPDATETODO_ERROR,
-    TOGGLETODO,
     ARCHIVING_TODO,
     ARCHIVETODO,
-    ARCHIVETODO_ERROR
+    ARCHIVETODO_ERROR,
+    COMPLETING_TODO,
+    COMPLETETODO,
+    COMPLETETODO_ERROR
 } from "../actions/index.js";
 
 let uuid = require("uuid-v4");
@@ -92,19 +94,23 @@ const rootReducer = (state = initialState, action) => {
         // failure to delete todo
         case DELETETODO_ERROR:
             return Object.assign({}, state, { status: "DELETE TODO ERROR" });
-        // change a todo's completion status
-        case TOGGLETODO:
-            console.log("ACTION.PAYLOAD: ", action.payload);
+        // completing a todo
+        case COMPLETING_TODO:
+            return Object.assign({}, state, { status: "COMPLETING A TODO" });
+        case COMPLETETODO:
             return Object.assign({}, state, {
                 todos: state.todos.map(todo => {
-                    if (todo.id === action.payload) {
+                    if (todo._id === action.payload.id) {
                         return Object.assign({}, todo, {
-                            isComplete: !todo.isComplete
+                            isComplete: action.payload.status
                         });
                     }
-                    return todo;
-                }),
-                status: "TOGGLED A TODO"
+                })
+            });
+        // failure to complete a todo
+        case COMPLETETODO_ERROR:
+            return Object.assign({}, state, {
+                status: "COMPLETING TODO ERROR"
             });
         // archiving a todo
         case ARCHIVING_TODO:
