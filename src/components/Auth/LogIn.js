@@ -13,8 +13,11 @@ const FormFields = () => {
 // 3rd party oAuth buttons
 const ThirdPartyLogIn = () => {
     return (
-        <div>
-            <h1>Buttons here</h1>
+        <div className="LogIn_3rdPartyContainer">
+            <button className="LogIn_3rdPartyBtn">Google</button>
+            <button className="LogIn_3rdPartyBtn">Facebook</button>
+            <button className="LogIn_3rdPartyBtn">Twitter</button>
+            <button className="LogIn_3rdPartyBtn">Github</button>
         </div>
     );
 };
