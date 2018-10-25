@@ -4,7 +4,7 @@ import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 // actions
-import { deleteTodo, toggleTodo } from "../actions/index";
+import { deleteTodo, completeTodo } from "../actions/index";
 // material components
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
@@ -59,7 +59,7 @@ class Todo extends Component {
     handleShowList = () => {
         this.setState({ toggled: !this.state.showList });
     };
-    handleComplete = id => {
+    handleCompleteTodo = id => {
         this.props.toggleTodo(this.props.todos[id].id);
     };
 
@@ -120,19 +120,19 @@ class Todo extends Component {
                 {this.props.todos.includes(this.props.todos[id]) ? (
                     // NORMAL VIEW - read a todo with no line breaks
                     <Paper className="Todo_content">
-                        <h3 className="Todo_header">
-                            {this.props.todos[id].title}
-                        </h3>
+                        <h3 className="Todo_header">{todo.title}</h3>
                         <p
                             style={{
-                                textDecoration: this.props.todos[id].isComplete
+                                textDecoration: todo.isComplete
                                     ? "line-through"
                                     : "none"
                             }}
                             className="Todo_text"
-                            onClick={() => this.handleComplete(id)}
+                            onClick={() =>
+                                this.handleComplete(todo._id, todo.isComplete)
+                            }
                         >
-                            {this.props.todos[id].content}
+                            {todo.content}
                         </p>
                     </Paper>
                 ) : (
@@ -153,6 +153,6 @@ export default connect(
     mapStateToProps,
     {
         deleteTodo,
-        toggleTodo
+        completeTodo
     }
 )(withStyles(styles)(Todo));
