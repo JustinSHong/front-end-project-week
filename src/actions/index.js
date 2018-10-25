@@ -94,17 +94,20 @@ export const archiveTodo = (id, status) => dispatch => {
 };
 
 export const completeTodo = (id, status) => dispatch => {
+    console.log("MADE IT TO COMPLETETODO ACTION CREATOR");
+    console.log(`id ${id} ${status}`);
     dispatch({ type: COMPLETING_TODO });
     axios
         .put(`${url}/api/notes/${id}`, {
-            isComplete: status
+            isComplete: !status
         })
         .then(res => {
+            console.log(`response ${JSON.stringify(res.data)}`);
             dispatch({
                 type: COMPLETETODO,
                 payload: {
-                    id: id,
-                    status: !status
+                    id: res.data._id,
+                    status: !res.data.isComplete
                 }
             });
         })

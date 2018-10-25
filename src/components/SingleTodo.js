@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 // actions
-import { toggleTodo, deleteTodo, archiveTodo } from "../actions/index";
+import { completeTodo, deleteTodo, archiveTodo } from "../actions/index";
 // material components
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -26,8 +26,10 @@ class SingleTodo extends React.Component {
         anchorEl: null
     };
     // change a todo's completion status
-    handleToggleTodo = id => {
-        this.props.toggleTodo(id);
+    handleCompleteTodo = (id, status) => {
+        console.log("MADE IT TO HANDLECOMPLETETODO");
+        console.log(`id ${id} status ${status}`);
+        this.props.completeTodo(id, status);
     };
     // delete a todo
     handleDeleteTodo = id => {
@@ -50,6 +52,8 @@ class SingleTodo extends React.Component {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         const { classes, index, todo } = this.props;
+        console.log(`SINGLE TODO PROPS ${JSON.stringify(todo)}`);
+
         return [
             <Card className="SingleTodo">
                 <Link className="SingleTodo_link" to={`/todo/${index}`}>
@@ -63,7 +67,9 @@ class SingleTodo extends React.Component {
                 >
                     <p
                         className="SingleTodo_content"
-                        // onClick={() => this.handleToggleTodo(id)}
+                        onClick={() => {
+                            this.handleCompleteTodo(todo._id, todo.isComplete);
+                        }}
                         style={{
                             textDecoration: todo.isComplete
                                 ? "line-through"
@@ -134,5 +140,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { toggleTodo, deleteTodo, archiveTodo }
+    { completeTodo, deleteTodo, archiveTodo }
 )(withStyles(styles)(SingleTodo));

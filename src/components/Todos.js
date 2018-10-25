@@ -45,7 +45,7 @@ class Todos extends Component {
                 {this.props.todos.map((todo, index) => {
                     return (
                         <SingleTodo
-                            key={todo._id}
+                            key={index}
                             index={index}
                             todo={todo}
                             handleClick={this.handleClick}

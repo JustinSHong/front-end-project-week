@@ -98,6 +98,7 @@ const rootReducer = (state = initialState, action) => {
         case COMPLETING_TODO:
             return Object.assign({}, state, { status: "COMPLETING A TODO" });
         case COMPLETETODO:
+            console.log(`COMPLETE TODO REDUCER ${JSON.stringify(state.todos)}`);
             return Object.assign({}, state, {
                 todos: state.todos.map(todo => {
                     if (todo._id === action.payload.id) {
@@ -105,6 +106,7 @@ const rootReducer = (state = initialState, action) => {
                             isComplete: action.payload.status
                         });
                     }
+                    return todo;
                 })
             });
         // failure to complete a todo
