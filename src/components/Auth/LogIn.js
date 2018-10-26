@@ -16,7 +16,7 @@ const FormFields = () => {
                     />
                     <input
                         className="FormFields_Input"
-                        type="text"
+                        type="password"
                         placeholder="Your password"
                         required
                     />
