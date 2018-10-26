@@ -5,11 +5,29 @@ import "../../styles/LogIn.css";
 // username and password fields
 const FormFields = () => {
     return (
-        <div>
-            <h1>form fields here</h1>
+        <div className="FormFieldsContainer">
+            <form className="FormFields_Form">
+                <fieldset className="FormFields_InputContainer">
+                    <input
+                        className="FormFields_Input"
+                        type="email"
+                        placeholder="Your email"
+                        required
+                    />
+                    <input
+                        className="FormFields_Input"
+                        type="text"
+                        placeholder="Your password"
+                        required
+                    />
+                </fieldset>
+                <button className="FormFields_LogInBtn">Log In</button>
+                <button className="FormFields_SignUpBtn">Sign Up</button>
+            </form>
         </div>
     );
 };
+
 // 3rd party oAuth buttons
 const ThirdPartyLogIn = () => {
     return (
