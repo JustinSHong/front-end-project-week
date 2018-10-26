@@ -1,5 +1,4 @@
 .LogInContainer {
-    border: 1px solid red;
     padding: 20px 2.5rem;
     width: 50%;
     height: 400px;
@@ -9,7 +8,6 @@
 }
 
 .LogIn_3rdPartyContainer {
-    border: 2px solid blue;
     height: 100%;
     width: 50%;
     display: flex;
@@ -19,7 +17,6 @@
 }
 
 .FormFieldsContainer {
-    border: 2px solid blue;
     height: 100%;
     width: 50%;
 }
@@ -65,6 +62,11 @@
     font-weight: bold;
     letter-spacing: 2px;
     outline: 0;
+}
+
+.FormFields_LogInBtn:hover,
+.FormFields_SignUpBtn:hover {
+    background-color: black;
 }
 
 .LogIn_3rdPartyBtn {
