@@ -43,7 +43,11 @@ const getVisibleTodos = (todos, filter, target) => {
 const mapStateToProps = state => {
     // filtered todos are set as Todo component's props
     return {
-        todos: getVisibleTodos(state.todos, state.filter, state.searchText)
+        todos: getVisibleTodos(
+            state.todos.todos,
+            state.filter,
+            state.searchText
+        )
     };
 };
 
