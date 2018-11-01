@@ -17,7 +17,8 @@ import {
     ARCHIVETODO_ERROR,
     COMPLETING_TODO,
     COMPLETETODO,
-    COMPLETETODO_ERROR
+    COMPLETETODO_ERROR,
+    SET_VISIBILITY_FILTER
 } from "../actions/index.js";
 
 let uuid = require("uuid-v4");
@@ -133,7 +134,7 @@ const todos = (state = initialState, action) => {
         case ARCHIVETODO_ERROR:
             return Object.assign({}, state, { status: "ARCHIVE TODO ERROR" });
         // change filter status of the app
-        case "SET_VISIBILITY_FILTER":
+        case SET_VISIBILITY_FILTER:
             return Object.assign({}, state, {
                 filter: action.payload.filter,
                 searchText: action.payload.searchText

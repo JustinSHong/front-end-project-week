@@ -18,6 +18,7 @@ export const ARCHIVETODO_ERROR = "ARCHIVETODO_ERROR";
 export const COMPLETING_TODO = "COMPLETING_TODO";
 export const COMPLETETODO = "COMPLETETODO";
 export const COMPLETETODO_ERROR = "COMPLETETODO_ERROR";
+export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
 // filter types
 export const VisibilityFilters = {
     SHOW_ALL_TODOS: "ALL_TODOS",
@@ -161,7 +162,7 @@ export const updateTodo = (id, title, text) => dispatch => {
 
 export function setVisibilityFilter(filter, text = "") {
     return {
-        type: "SET_VISIBILITY_FILTER",
+        type: SET_VISIBILITY_FILTER,
         payload: {
             filter,
             searchText: text
