@@ -50,33 +50,26 @@ class EditTodoForm extends Component {
     // update an existing todo
     handleUpdateTodo = id => {
         const { title, text } = this.state;
-        const { _id } = this.props.todos[parseInt(id, 10)];
+        const { _id } = this.props.todos.todos[parseInt(id, 10)];
         this.props.updateTodo(_id, title, text);
         this.setState({ title: "", text: "" });
-    };
-    // listify a todos text content
-    handleListifyTodo = id => {
-        const { text } = this.state;
-        const idHash = this.props.todos[id].id;
-        this.props.listifyTodo(idHash, text);
     };
 
     render() {
         const { id } = this.props.match.params;
         const { classes } = this.props;
+        const todo = this.props.todos.todos[parseInt(id, 10)];
 
         return (
             <div className="EditTodoFormContainer fade">
-                {this.props.todos[parseInt(id, 10)] ? (
+                {this.props.todos.todos[parseInt(id, 10)] ? (
                     [
                         <h3 className="EditTodoForm_header">Edit Note:</h3>,
                         <form className="EditTodoForm_form">
                             <Input
                                 className={classes.editNoteInput}
                                 name="title"
-                                placeholder={
-                                    this.props.todos[parseInt(id, 10)].title
-                                }
+                                placeholder={todo.title}
                                 value={this.state.title}
                                 disableUnderline={true}
                                 onChange={this.handleNewInput}
@@ -84,9 +77,7 @@ class EditTodoForm extends Component {
                             <Input
                                 className={classes.editNoteInput}
                                 name="text"
-                                placeholder={
-                                    this.props.todos[parseInt(id, 10)].content
-                                }
+                                placeholder={todo.content}
                                 value={this.state.text}
                                 multiline
                                 rows="10"

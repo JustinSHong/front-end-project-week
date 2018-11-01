@@ -102,9 +102,7 @@ class Todo extends Component {
                 {/* Note/List View Toggle, Edit Delete Buttons */}
                 <div className="Todo_button_container">
                     <Link
-                        to={{
-                            pathname: `/editTodo/${id}`
-                        }}
+                        to={`/editTodo/${id}`}
                         style={{ textDecoration: "none" }}
                     >
                         <Button className={classes.todoButton}>Edit</Button>
