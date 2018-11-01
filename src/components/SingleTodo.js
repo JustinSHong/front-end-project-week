@@ -27,8 +27,6 @@ class SingleTodo extends React.Component {
     };
     // change a todo's completion status
     handleCompleteTodo = (id, status) => {
-        console.log("MADE IT TO HANDLECOMPLETETODO");
-        console.log(`id ${id} status ${status}`);
         this.props.completeTodo(id, status);
     };
     // delete a todo
@@ -52,7 +50,6 @@ class SingleTodo extends React.Component {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         const { classes, index, todo } = this.props;
-        console.log(`SINGLE TODO PROPS ${JSON.stringify(todo)}`);
 
         return [
             <Card className="SingleTodo">
@@ -134,7 +131,7 @@ class SingleTodo extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        todos: state.todos
+        todos: state.todos.todos
     };
 };
 

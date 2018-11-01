@@ -59,8 +59,8 @@ class Todo extends Component {
     handleShowList = () => {
         this.setState({ toggled: !this.state.showList });
     };
-    handleCompleteTodo = id => {
-        this.props.toggleTodo(this.props.todos[id].id);
+    handleCompleteTodo = (id, status) => {
+        this.props.completeTodo(id, status);
     };
 
     render() {
@@ -128,9 +128,12 @@ class Todo extends Component {
                                     : "none"
                             }}
                             className="Todo_text"
-                            onClick={() =>
-                                this.handleComplete(todo._id, todo.isComplete)
-                            }
+                            onClick={() => {
+                                this.handleCompleteTodo(
+                                    todo._id,
+                                    todo.isComplete
+                                );
+                            }}
                         >
                             {todo.content}
                         </p>
@@ -145,7 +148,7 @@ class Todo extends Component {
 
 const mapStateToProps = state => {
     return {
-        todos: state.todos
+        todos: state.todos.todos
     };
 };
 
