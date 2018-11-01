@@ -7,8 +7,6 @@ import Todos from "./Todos";
 // container component that will filter todos list according to store's filter status
 const getVisibleTodos = (todos, filter, target) => {
     switch (filter) {
-        // no filter applied
-        case "":
         case VisibilityFilters.SHOW_ALL_TODOS:
             return todos;
         // only return finished tasks (isComplete: true)
@@ -45,8 +43,8 @@ const mapStateToProps = state => {
     return {
         todos: getVisibleTodos(
             state.todos.todos,
-            state.filter,
-            state.searchText
+            state.todos.filter,
+            state.todos.searchText
         )
     };
 };
