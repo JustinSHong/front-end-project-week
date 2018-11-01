@@ -19,6 +19,9 @@ export const COMPLETING_TODO = "COMPLETING_TODO";
 export const COMPLETETODO = "COMPLETETODO";
 export const COMPLETETODO_ERROR = "COMPLETETODO_ERROR";
 export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
+export const CREATING_USER = "CREATING_USER";
+export const CREATE_USER = "CREATE_USER";
+export const CREATEUSER_ERROR = "CREATEUSER_ERROR";
 // filter types
 export const VisibilityFilters = {
     SHOW_ALL_TODOS: "ALL_TODOS",
@@ -38,7 +41,6 @@ export const fetchTodos = () => dispatch => {
     axios
         .get(`${url}/api/notes`)
         .then(res => {
-            console.log(`FETCHING TODO RESPONSE ${res}`);
             dispatch({
                 type: FETCH_TODOS,
                 payload: res.data
@@ -95,15 +97,12 @@ export const archiveTodo = (id, status) => dispatch => {
 };
 
 export const completeTodo = (id, status) => dispatch => {
-    console.log("MADE IT TO COMPLETETODO ACTION CREATOR");
-    console.log(`id ${id} ${status}`);
     dispatch({ type: COMPLETING_TODO });
     axios
         .put(`${url}/api/notes/${id}`, {
             isComplete: !status
         })
         .then(res => {
-            console.log(`response ${JSON.stringify(res.data)}`);
             dispatch({
                 type: COMPLETETODO,
                 payload: {
@@ -169,3 +168,17 @@ export function setVisibilityFilter(filter, text = "") {
         }
     };
 }
+
+// USER ACTIONS: creating and signing up
+export const createUser = user => dispatch => {
+    dispatch({ type: CREATING_USER });
+    axios
+        .post(`${url}/api/users`, user)
+        .then(user => {
+            console.log(`user ${user}`);
+            dispatch({ type: CREATE_USER, payload: user.data });
+        })
+        .catch(() => {
+            dispatch({ type: CREATEUSER_ERROR });
+        });
+};
