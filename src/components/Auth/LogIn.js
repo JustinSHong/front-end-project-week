@@ -70,12 +70,13 @@ class LogIn extends Component {
             username: email,
             auth: "email"
         };
-        // save user to the db
-        this.props.createUser(user);
         // save user to firebase
         auth.doCreateUserWithEmailAndPassword(email, password)
             .then(user => {
-                this.setState({ email: "", password: "" });
+                this.setState({ email: "", password: "" }, () => {
+                    // save user to the db
+                    this.props.createUser(user);
+                });
             })
             .catch(error => {
                 this.setState({ error: error }, () => {
