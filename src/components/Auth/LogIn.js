@@ -78,7 +78,9 @@ class LogIn extends Component {
                 this.setState({ email: "", password: "" });
             })
             .catch(error => {
-                this.setState({ error: error });
+                this.setState({ error: error }, () => {
+                    console.log(this.state.error);
+                });
             });
 
         e.preventDefault();
