@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import { Redirect } from "react-router";
 // styles
 import "../../styles/LogIn.css";
 // actions
@@ -55,7 +57,8 @@ class LogIn extends Component {
     state = {
         email: "",
         password: "",
-        error: null
+        error: null,
+        toAppHome: false
     };
 
     handleNewInput = e => {
@@ -64,12 +67,10 @@ class LogIn extends Component {
 
     handleSignUp = e => {
         const { email, password } = this.state;
-
         const user = {
             username: this.state.email,
             auth: "email"
         };
-
         // save user to the db
         this.props.createUser(user);
         // save user to firebase
@@ -82,11 +83,15 @@ class LogIn extends Component {
                     console.log(this.state.error);
                 });
             });
-
         e.preventDefault();
     };
 
     render() {
+        // redirect to app home page on successful sign up
+        if (this.state.toAppHome) {
+            <Redirect to="/" />;
+        }
+
         return (
             <div className="LogInContainer">
                 <FormFields
@@ -99,7 +104,9 @@ class LogIn extends Component {
     }
 }
 
-export default connect(
-    null,
-    { createUser }
-)(LogIn);
+export default withRouter(
+    connect(
+        null,
+        { createUser }
+    )(LogIn)
+);
