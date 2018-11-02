@@ -37,7 +37,9 @@ const user = (state = initialState, action) => {
                 status: "LOGGED IN A USER"
             });
         case LOGINUSER_ERROR:
-            return Object.assign({}, state, { status: "LOG IN USER ERROR" });
+            return Object.assign({}, state, {
+                status: action.payload.code + ": " + action.payload.message
+            });
         default:
             return state;
     }
