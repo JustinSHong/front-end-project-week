@@ -67,7 +67,7 @@ class LogIn extends Component {
     handleSignUp = e => {
         const { email, password } = this.state;
         const user = {
-            username: this.state.email,
+            username: email,
             auth: "email"
         };
         // save user to the db
@@ -76,6 +76,27 @@ class LogIn extends Component {
         auth.doCreateUserWithEmailAndPassword(email, password)
             .then(user => {
                 this.setState({ email: "", password: "" });
+            })
+            .catch(error => {
+                this.setState({ error: error }, () => {
+                    console.log(this.state.error);
+                });
+            });
+        e.preventDefault();
+    };
+
+    handleLogIn = e => {
+        const { email, password } = this.state;
+        const userDetails = {
+            username: email,
+            auth: "email",
+            authenticated: true
+        };
+        auth.doSignInWithEmailAndPassword(email, password)
+            .then(user => {
+                this.setState({ email: "", password: "" }, () => {
+                    this.props.logInUser(userDetails);
+                });
             })
             .catch(error => {
                 this.setState({ error: error }, () => {
