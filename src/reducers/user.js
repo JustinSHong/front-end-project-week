@@ -2,7 +2,10 @@
 import {
     CREATING_USER,
     CREATE_USER,
-    CREATEUSER_ERROR
+    CREATEUSER_ERROR,
+    LOGGINGIN_USER,
+    LOGIN_USER,
+    LOGINUSER_ERROR
 } from "../actions/index.js";
 
 const initialState = {
@@ -24,6 +27,8 @@ const user = (state = initialState, action) => {
             });
         case CREATEUSER_ERROR:
             return Object.assign({}, state, { status: "CREATE USER ERROR" });
+        case LOGGINGIN_USER:
+            return Object.assign({}, state, { status: "LOGGING IN A USER" });
         default:
             return state;
     }
