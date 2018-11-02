@@ -4,7 +4,7 @@ import { Redirect } from "react-router";
 // styles
 import "../../styles/LogIn.css";
 // actions
-import { createUser } from "../../actions/index";
+import { createUser, logInUser } from "../../actions/index";
 // firebase
 import { auth } from "../../firebase";
 
@@ -31,7 +31,9 @@ const FormFields = props => {
                         required
                     />
                 </fieldset>
-                <button className="FormFields_LogInBtn">Log In</button>
+                <button className="FormFields_LogInBtn" onClick={props.logIn}>
+                    Log In
+                </button>
                 <button className="FormFields_SignUpBtn" onClick={props.signUp}>
                     Sign Up
                 </button>
@@ -96,12 +98,12 @@ class LogIn extends Component {
         auth.doSignInWithEmailAndPassword(email, password)
             .then(user => {
                 this.setState({ email: "", password: "" }, () => {
-                    this.props.logInUser(userDetails);
+                    this.props.logInUser(userDetails, null);
                 });
             })
             .catch(error => {
                 this.setState({ error: error }, () => {
-                    console.log(this.state.error);
+                    this.props.logInUser(null, error);
                 });
             });
         e.preventDefault();
@@ -118,6 +120,7 @@ class LogIn extends Component {
                 <FormFields
                     signUp={this.handleSignUp}
                     newInput={this.handleNewInput}
+                    logIn={this.handleLogIn}
                 />
                 <ThirdPartyLogIn />
             </div>
@@ -127,5 +130,5 @@ class LogIn extends Component {
 
 export default connect(
     null,
-    { createUser }
+    { createUser, logInUser }
 )(LogIn);
