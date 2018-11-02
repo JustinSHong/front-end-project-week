@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import "../../styles/LogIn.css";
 // actions
 import { createUser } from "../../actions/index";
+// firebase
+import { auth } from "../../firebase";
 
 // username and password fields
 const FormFields = props => {
@@ -52,7 +54,8 @@ const ThirdPartyLogIn = () => {
 class LogIn extends Component {
     state = {
         email: "",
-        password: ""
+        password: "",
+        error: null
     };
 
     handleNewInput = e => {
@@ -60,13 +63,25 @@ class LogIn extends Component {
     };
 
     handleSignUp = e => {
-        e.preventDefault();
+        const { email, password } = this.state;
+
         const user = {
             username: this.state.email,
             auth: "email"
         };
 
+        // save user to the db
         this.props.createUser(user);
+        // save user to firebase
+        auth.doCreateUserWithEmailAndPassword(email, password)
+            .then(user => {
+                this.setState({ email: "", password: "" });
+            })
+            .catch(error => {
+                this.setState({ error: error });
+            });
+
+        e.preventDefault();
     };
 
     render() {
