@@ -22,6 +22,9 @@ export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
 export const CREATING_USER = "CREATING_USER";
 export const CREATE_USER = "CREATE_USER";
 export const CREATEUSER_ERROR = "CREATEUSER_ERROR";
+export const LOGGINGIN_USER = "LOGGINGIN_USER";
+export const LOGIN_USER = "LOGIN_USER";
+export const LOGINUSER_ERROR = "LOGINUSER_ERROR";
 // filter types
 export const VisibilityFilters = {
     SHOW_ALL_TODOS: "ALL_TODOS",
@@ -175,10 +178,20 @@ export const createUser = user => dispatch => {
     axios
         .post(`${url}/api/users`, user)
         .then(user => {
-            console.log(`user ${user}`);
             dispatch({ type: CREATE_USER, payload: user.data });
         })
         .catch(() => {
             dispatch({ type: CREATEUSER_ERROR });
         });
+};
+
+export const logInUser = (user, error) => dispatch => {
+    dispatch({ type: LOGGINGIN_USER });
+    // check for log in errors from firebase
+    if (error) {
+        dispatch({ type: LOGINUSER_ERROR, payload: error });
+    } else {
+        // no log in errors occurred
+        dispatch({ type: LOGIN_USER, payload: user });
+    }
 };
