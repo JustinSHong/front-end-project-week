@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
 import { Redirect } from "react-router";
 // styles
 import "../../styles/LogIn.css";
@@ -104,9 +103,7 @@ class LogIn extends Component {
     }
 }
 
-export default withRouter(
-    connect(
-        null,
-        { createUser }
-    )(LogIn)
-);
+export default connect(
+    null,
+    { createUser }
+)(LogIn);
