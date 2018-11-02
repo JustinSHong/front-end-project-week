@@ -8,7 +8,8 @@ import {
 const initialState = {
     email: "",
     authType: "",
-    status: ""
+    status: "",
+    authenticated: false
 };
 
 const user = (state = initialState, action) => {
