@@ -22,6 +22,8 @@ const user = (state = initialState, action) => {
                 authType: "email",
                 status: "CREATED A NEW USER"
             });
+        case CREATEUSER_ERROR:
+            return Object.assign({}, state, { status: "CREATE USER ERROR" });
         default:
             return state;
     }
