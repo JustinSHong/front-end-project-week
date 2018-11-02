@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { Redirect } from "react-router";
 // styles
 import "./styles/App.css";
 import "./styles/animation.css";
@@ -17,28 +18,38 @@ import VisibilityTodos from "./components/VisibilityTodos";
 
 class App extends Component {
     // fetch all notes
-    componentDidMount() {
-        this.props.fetchTodos();
-    }
+    // componentDidMount() {
+    //     this.props.fetchTodos();
+    // }
 
     render() {
+        const { authenticated } = this.props.user;
+        console.log(`authenticated ${authenticated}`);
         return (
             <div className="App fade">
                 <Route exact path="/auth" component={Auth} />
-                {/* <div className="ControlPanel">
-                    <ControlPanel />
-                </div>
-                <div className="TodoContainer">
-                    <Route exact path="/" component={VisibilityTodos} />
-                    <Route exact path="/addTodo" component={CreateTodoForm} />
-                    <Route exact path="/todo/:id" component={Todo} />
-                    <Route
-                        exact
-                        path="/editTodo/:id"
-                        component={EditTodoForm}
-                    />
-                    
-                </div> */}
+
+                {authenticated ? (
+                    <div className="App fade">
+                        <div className="ControlPanel">
+                            <ControlPanel />
+                        </div>
+                        <div className="TodoContainer">
+                            <Route exact path="/" component={VisibilityTodos} />
+                            <Route
+                                exact
+                                path="/addTodo"
+                                component={CreateTodoForm}
+                            />
+                            <Route exact path="/todo/:id" component={Todo} />
+                            <Route
+                                exact
+                                path="/editTodo/:id"
+                                component={EditTodoForm}
+                            />
+                        </div>
+                    </div>
+                ) : null}
             </div>
         );
     }
@@ -46,6 +57,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
     return {
+        user: state.user,
         todos: state.todos
     };
 };
