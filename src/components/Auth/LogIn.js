@@ -1,28 +1,37 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 // styles
 import "../../styles/LogIn.css";
+// actions
+import { createUser } from "../../actions/index";
 
 // username and password fields
-const FormFields = () => {
+const FormFields = props => {
     return (
         <div className="FormFieldsContainer">
             <form className="FormFields_Form">
                 <fieldset className="FormFields_InputContainer">
                     <input
                         className="FormFields_Input"
+                        name="email"
                         type="email"
                         placeholder="Your email"
+                        onChange={props.newInput}
                         required
                     />
                     <input
                         className="FormFields_Input"
+                        name="password"
                         type="password"
                         placeholder="Your password"
+                        onChange={props.newInput}
                         required
                     />
                 </fieldset>
                 <button className="FormFields_LogInBtn">Log In</button>
-                <button className="FormFields_SignUpBtn">Sign Up</button>
+                <button className="FormFields_SignUpBtn" onClick={props.signUp}>
+                    Sign Up
+                </button>
             </form>
         </div>
     );
@@ -45,14 +54,35 @@ class LogIn extends Component {
         email: "",
         password: ""
     };
+
+    handleNewInput = e => {
+        this.setState({ [e.target.name]: e.target.value });
+    };
+
+    handleSignUp = e => {
+        e.preventDefault();
+        const user = {
+            username: this.state.email,
+            auth: "email"
+        };
+
+        this.props.createUser(user);
+    };
+
     render() {
         return (
             <div className="LogInContainer">
-                <FormFields />
+                <FormFields
+                    signUp={this.handleSignUp}
+                    newInput={this.handleNewInput}
+                />
                 <ThirdPartyLogIn />
             </div>
         );
     }
 }
 
-export default LogIn;
+export default connect(
+    null,
+    { createUser }
+)(LogIn);
