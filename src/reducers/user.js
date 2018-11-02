@@ -22,13 +22,20 @@ const user = (state = initialState, action) => {
         case CREATE_USER:
             return Object.assign({}, state, {
                 email: action.payload.username,
-                authType: "email",
+                authType: action.payload.auth,
                 status: "CREATED A NEW USER"
             });
         case CREATEUSER_ERROR:
             return Object.assign({}, state, { status: "CREATE USER ERROR" });
         case LOGGINGIN_USER:
             return Object.assign({}, state, { status: "LOGGING IN A USER" });
+        case LOGIN_USER:
+            return Object.assign({}, state, {
+                email: action.payload.username,
+                authType: action.payload.auth,
+                authenticated: true,
+                status: "LOGGED IN A USER"
+            });
         default:
             return state;
     }
