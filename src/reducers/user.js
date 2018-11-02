@@ -26,7 +26,9 @@ const user = (state = initialState, action) => {
                 status: "CREATED A NEW USER"
             });
         case CREATEUSER_ERROR:
-            return Object.assign({}, state, { status: "CREATE USER ERROR" });
+            return Object.assign({}, state, {
+                status: action.payload.code + ": " + action.payload.message
+            });
         case LOGGINGIN_USER:
             return Object.assign({}, state, { status: "LOGGING IN A USER" });
         case LOGIN_USER:

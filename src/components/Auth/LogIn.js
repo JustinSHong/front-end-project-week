@@ -77,12 +77,12 @@ class LogIn extends Component {
             .then(user => {
                 this.setState({ email: "", password: "" }, () => {
                     // save user to the db
-                    this.props.createUser(user);
+                    this.props.createUser(user, null);
                 });
             })
             .catch(error => {
                 this.setState({ error: error }, () => {
-                    console.log(this.state.error);
+                    this.props.createUser(null, error);
                 });
             });
         e.preventDefault();

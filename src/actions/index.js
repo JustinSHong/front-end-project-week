@@ -173,7 +173,7 @@ export function setVisibilityFilter(filter, text = "") {
 }
 
 // USER ACTIONS: creating and signing up
-export const createUser = user => dispatch => {
+export const createUser = (user, error) => dispatch => {
     dispatch({ type: CREATING_USER });
     axios
         .post(`${url}/api/users`, user)
@@ -181,7 +181,7 @@ export const createUser = user => dispatch => {
             dispatch({ type: CREATE_USER, payload: user.data });
         })
         .catch(() => {
-            dispatch({ type: CREATEUSER_ERROR });
+            dispatch({ type: CREATEUSER_ERROR, payload: error });
         });
 };
 
