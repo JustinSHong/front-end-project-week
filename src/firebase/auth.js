@@ -8,3 +8,6 @@ export const doCreateUserWithEmailAndPassword = (email, password) =>
 // Log In
 export const doSignInWithEmailAndPassword = (email, password) =>
     auth.signInWithEmailAndPassword(email, password);
+
+// Log In with Google
+export const doSignInWithPopup = provider => auth.signInWithPopup(provider);
