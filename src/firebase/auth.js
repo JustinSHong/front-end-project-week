@@ -1,6 +1,12 @@
 // interface between Firebase and this React app
 import { auth } from "./firebase";
 
+// Provider Objects
+export const GoogleProvider = auth.GoogleAuthProvider();
+export const FacebookProvider = auth.FacebookAuthProvider();
+export const TwitterProvider = auth.TwitterProvider();
+export const GithubProvider = auth.GithubAuthProvider();
+
 // Sign Up
 export const doCreateUserWithEmailAndPassword = (email, password) =>
     auth.createUserWithEmailAndPassword(email, password);
