@@ -14,3 +14,6 @@ export const doSignInWithPopup = provider => auth.signInWithPopup(provider);
 
 // Log In with Facebook
 export const doSignInWithFacebook = provider => auth.signInWithPopup(provider);
+
+// Log In with Twitter
+export const doSignInWithTwitter = provider => auth.signInWithPopup(provider);
