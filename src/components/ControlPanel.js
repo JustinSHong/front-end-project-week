@@ -34,10 +34,8 @@ const styles = theme => ({
 
 class ControlPanel extends Component {
     handleSignOut = () => {
-        console.log("MADE IT TO HANDLESIGN OUT");
         auth.doSignOut()
             .then(() => {
-                console.log("SIGN OUT SUCCESS");
                 this.props.signOutUser();
             })
             .catch(() => {
