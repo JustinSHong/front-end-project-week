@@ -20,9 +20,15 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 
 // Provider Objects
-export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
-export const FacebookProvider = new firebase.auth.FacebookAuthProvider();
-export const TwitterProvider = new firebase.auth.TwitterAuthProvider();
-export const GithubProvider = new firebase.auth.GithubAuthProvider();
+const GoogleProvider = new firebase.auth.GoogleAuthProvider();
+const FacebookProvider = new firebase.auth.FacebookAuthProvider();
+const TwitterProvider = new firebase.auth.TwitterAuthProvider();
+const GithubProvider = new firebase.auth.GithubAuthProvider();
 
-export { auth };
+export {
+    auth,
+    GoogleProvider,
+    FacebookProvider,
+    TwitterProvider,
+    GithubProvider
+};
