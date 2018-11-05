@@ -25,6 +25,9 @@ export const CREATEUSER_ERROR = "CREATEUSER_ERROR";
 export const LOGGINGIN_USER = "LOGGINGIN_USER";
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGINUSER_ERROR = "LOGINUSER_ERROR";
+export const SIGNINGOUT_USER = "SIGNINGOUT_USER";
+export const SIGNOUT_USER = "SIGNOUT_USER";
+export const SIGNOUTUSER_ERROR = "SIGNOUTUSER_ERROR";
 // filter types
 export const VisibilityFilters = {
     SHOW_ALL_TODOS: "ALL_TODOS",
@@ -193,5 +196,14 @@ export const logInUser = (user, error) => dispatch => {
     } else {
         // no log in errors occurred
         dispatch({ type: LOGIN_USER, payload: user });
+    }
+};
+
+export const signOutUser = (error = null, auth) => dispatch => {
+    dispatch({ type: SIGNINGOUT_USER });
+    if (error) {
+        dispatch({ stype: SIGNOUTUSER_ERROR, payload: error });
+    } else {
+        dispatch({ type: SIGNOUT_USER, payload: auth });
     }
 };
