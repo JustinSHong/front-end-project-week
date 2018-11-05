@@ -58,7 +58,9 @@ const ThirdPartyLogIn = props => {
             <button className="LogIn_3rdPartyBtn" onClick={props.twitterSignIn}>
                 Twitter
             </button>
-            <button className="LogIn_3rdPartyBtn">Github</button>
+            <button className="LogIn_3rdPartyBtn" onClick={props.githubSignIn}>
+                Github
+            </button>
         </div>
     );
 };
@@ -166,6 +168,22 @@ class LogIn extends Component {
             });
     };
 
+    handleLogInWithGithub = () => {
+        const provider = firebase.GithubProvider;
+        auth.doSignInWithGithub(provider)
+            .then(result => {
+                const token = result.credential.accessToken;
+                const user = result.user;
+                console.log(`token ${token}`);
+                console.log(`user ${JSON.stringify(user)}`);
+            })
+            .catch(error => {
+                this.setState({ error: error }, () => {
+                    console.log(error);
+                });
+            });
+    };
+
     render() {
         // redirect to app home page on successful sign up
         if (this.state.toAppHome) {
@@ -183,6 +201,7 @@ class LogIn extends Component {
                     googleSignIn={this.handleLogInWithGoogle}
                     facebookSignIn={this.handleLogInWithFacebook}
                     twitterSignIn={this.handleLogInWithTwitter}
+                    githubSignIn={this.handleLogInWithGithub}
                 />
             </div>
         );
