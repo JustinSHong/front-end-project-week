@@ -49,7 +49,12 @@ const ThirdPartyLogIn = props => {
             <button className="LogIn_3rdPartyBtn" onClick={props.googleSignIn}>
                 Google
             </button>
-            <button className="LogIn_3rdPartyBtn">Facebook</button>
+            <button
+                className="LogIn_3rdPartyBtn"
+                onClick={props.facebookSignIn}
+            >
+                Facebook
+            </button>
             <button className="LogIn_3rdPartyBtn">Twitter</button>
             <button className="LogIn_3rdPartyBtn">Github</button>
         </div>
@@ -117,7 +122,24 @@ class LogIn extends Component {
             .then(result => {
                 const token = result.credential.accessToken;
                 const user = result.user;
-                console.log(`RESULT ${JSON.stringify(result)}`);
+                console.log(`token ${token}`);
+                console.log(`user ${JSON.stringify(user)}`);
+            })
+            .catch(error => {
+                this.setState({ error: error }, () => {
+                    console.log(error);
+                });
+            });
+    };
+
+    handleLogInWithFacebook = () => {
+        const provider = firebase.FacebookProvider;
+        auth.doSignInWithFacebook(provider)
+            .then(result => {
+                const token = result.credential.accessToken;
+                const user = result.user;
+                console.log(`token ${token}`);
+                console.log(`user ${JSON.stringify(user)}`);
             })
             .catch(error => {
                 this.setState({ error: error }, () => {
@@ -139,7 +161,10 @@ class LogIn extends Component {
                     newInput={this.handleNewInput}
                     logIn={this.handleLogInWithEmail}
                 />
-                <ThirdPartyLogIn googleSignIn={this.handleLogInWithGoogle} />
+                <ThirdPartyLogIn
+                    googleSignIn={this.handleLogInWithGoogle}
+                    facebookSignIn={this.handleLogInWithFacebook}
+                />
             </div>
         );
     }
