@@ -20,3 +20,8 @@ export const doSignInWithTwitter = provider => auth.signInWithPopup(provider);
 
 // Log In with Github
 export const doSignInWithGithub = provider => auth.signInWithPopup(provider);
+
+// Sign out
+export const doSignOut = () => {
+    auth.signOut();
+};
