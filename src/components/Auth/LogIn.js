@@ -55,7 +55,9 @@ const ThirdPartyLogIn = props => {
             >
                 Facebook
             </button>
-            <button className="LogIn_3rdPartyBtn">Twitter</button>
+            <button className="LogIn_3rdPartyBtn" onClick={props.twitterSignIn}>
+                Twitter
+            </button>
             <button className="LogIn_3rdPartyBtn">Github</button>
         </div>
     );
@@ -148,6 +150,22 @@ class LogIn extends Component {
             });
     };
 
+    handleLogInWithTwitter = () => {
+        const provider = firebase.TwitterProvider;
+        auth.doSignInWithTwitter(provider)
+            .then(result => {
+                const token = result.credential.accessToken;
+                const user = result.user;
+                console.log(`token ${token}`);
+                console.log(`user ${JSON.stringify(user)}`);
+            })
+            .catch(error => {
+                this.setState({ error: error }, () => {
+                    console.log(error);
+                });
+            });
+    };
+
     render() {
         // redirect to app home page on successful sign up
         if (this.state.toAppHome) {
@@ -164,6 +182,7 @@ class LogIn extends Component {
                 <ThirdPartyLogIn
                     googleSignIn={this.handleLogInWithGoogle}
                     facebookSignIn={this.handleLogInWithFacebook}
+                    twitterSignIn={this.handleLogInWithTwitter}
                 />
             </div>
         );
