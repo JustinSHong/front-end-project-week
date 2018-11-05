@@ -5,7 +5,10 @@ import {
     CREATEUSER_ERROR,
     LOGGINGIN_USER,
     LOGIN_USER,
-    LOGINUSER_ERROR
+    LOGINUSER_ERROR,
+    SIGNINGOUT_USER,
+    SIGNOUT_USER,
+    SIGNOUTUSER_ERROR
 } from "../actions/index.js";
 
 const initialState = {
@@ -42,6 +45,8 @@ const user = (state = initialState, action) => {
             return Object.assign({}, state, {
                 status: action.payload.code + ": " + action.payload.message
             });
+        case SIGNINGOUT_USER:
+            return Object.assign({}, state, { status: "SIGNOUT OUT A USER" });
         default:
             return state;
     }
