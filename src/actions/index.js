@@ -199,11 +199,11 @@ export const logInUser = (user, error) => dispatch => {
     }
 };
 
-export const signOutUser = (error = null, auth) => dispatch => {
+export const signOutUser = (error = null) => dispatch => {
     dispatch({ type: SIGNINGOUT_USER });
     if (error) {
         dispatch({ stype: SIGNOUTUSER_ERROR, payload: error });
     } else {
-        dispatch({ type: SIGNOUT_USER, payload: auth });
+        dispatch({ type: SIGNOUT_USER });
     }
 };

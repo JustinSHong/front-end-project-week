@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 // firebase
 import { auth } from "../firebase";
 // actions
-import { setVisibilityFilter } from "../actions/index";
+import { setVisibilityFilter, signOutUser } from "../actions/index";
 // filter types
 import { VisibilityFilters } from "../actions/index";
 // material components
@@ -38,9 +38,11 @@ class ControlPanel extends Component {
         auth.doSignOut()
             .then(() => {
                 console.log("SIGN OUT SUCCESS");
+                this.props.signOutUser();
             })
             .catch(() => {
-                console.log("error signing out");
+                const error = { message: "error signing out user" };
+                this.props.signOutUser(error);
             });
     };
 
@@ -124,5 +126,5 @@ class ControlPanel extends Component {
 
 export default connect(
     null,
-    { setVisibilityFilter }
+    { setVisibilityFilter, signOutUser }
 )(withStyles(styles)(ControlPanel));
