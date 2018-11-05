@@ -10,7 +10,7 @@ export const doSignInWithEmailAndPassword = (email, password) =>
     auth.signInWithEmailAndPassword(email, password);
 
 // Log In with Google
-export const doSignInWithPopup = provider => auth.signInWithPopup(provider);
+export const doSignInWithGmail = provider => auth.signInWithPopup(provider);
 
 // Log In with Facebook
 export const doSignInWithFacebook = provider => auth.signInWithPopup(provider);
