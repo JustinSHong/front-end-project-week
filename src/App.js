@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Redirect } from "react-router";
+import { firebase } from "./firebase";
 // styles
 import "./styles/App.css";
 import "./styles/animation.css";
@@ -17,14 +18,17 @@ import EditTodoForm from "./components/EditTodoForm";
 import VisibilityTodos from "./components/VisibilityTodos";
 
 class App extends Component {
-    // fetch all notes
-    // componentDidMount() {
-    //     this.props.fetchTodos();
-    // }
+    componentDidMount() {
+        // monitor changes in an user's auth status
+        firebase.auth.onAuthStateChanged(authUser => {
+            console.log("AUTH USER OBJECT CHANGED");
+            authUser ? <Redirect to="/" /> : <Redirect to="/auth" />;
+        });
+    }
 
     render() {
         const { authenticated } = this.props.user;
-        console.log(`authenticated ${authenticated}`);
+
         return (
             <div className="App fade">
                 <Route exact path="/auth" component={Auth} />
