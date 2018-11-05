@@ -49,6 +49,8 @@ const user = (state = initialState, action) => {
             return Object.assign({}, state, { status: "SIGNOUT OUT A USER" });
         case SIGNOUT_USER:
             return Object.assign({}, state, initialState);
+        case SIGNOUTUSER_ERROR:
+            return Object.assign({}, state, { status: action.payload.message });
         default:
             return state;
     }
