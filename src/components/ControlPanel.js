@@ -96,7 +96,14 @@ class ControlPanel extends Component {
                 >
                     View Archived Todos
                 </Button>
-            </Link>
+            </Link>,
+            <Button
+                variant="contained"
+                className={classes.button}
+                style={{ backgroundColor: "#f44336" }}
+            >
+                Sign Out
+            </Button>
         ];
     }
 }
