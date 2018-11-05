@@ -47,6 +47,8 @@ const user = (state = initialState, action) => {
             });
         case SIGNINGOUT_USER:
             return Object.assign({}, state, { status: "SIGNOUT OUT A USER" });
+        case SIGNOUT_USER:
+            return Object.assign({}, state, initialState);
         default:
             return state;
     }
