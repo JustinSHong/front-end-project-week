@@ -6,7 +6,7 @@ import "../../styles/LogIn.css";
 // actions
 import { createUser, logInUser } from "../../actions/index";
 // firebase
-import { auth } from "../../firebase";
+import { auth, firebase } from "../../firebase";
 
 // username and password fields
 const FormFields = props => {
@@ -43,10 +43,12 @@ const FormFields = props => {
 };
 
 // 3rd party oAuth buttons
-const ThirdPartyLogIn = () => {
+const ThirdPartyLogIn = props => {
     return (
         <div className="LogIn_3rdPartyContainer">
-            <button className="LogIn_3rdPartyBtn">Google</button>
+            <button className="LogIn_3rdPartyBtn" onClick={props.googleSignIn}>
+                Google
+            </button>
             <button className="LogIn_3rdPartyBtn">Facebook</button>
             <button className="LogIn_3rdPartyBtn">Twitter</button>
             <button className="LogIn_3rdPartyBtn">Github</button>
@@ -88,7 +90,7 @@ class LogIn extends Component {
         e.preventDefault();
     };
 
-    handleLogIn = e => {
+    handleLogInWithEmail = e => {
         const { email, password } = this.state;
         const userDetails = {
             username: email,
@@ -109,6 +111,21 @@ class LogIn extends Component {
         e.preventDefault();
     };
 
+    handleLogInWithGoogle = () => {
+        const provider = firebase.GoogleProvider;
+        auth.doSignInWithGmail(provider)
+            .then(result => {
+                const token = result.credential.accessToken;
+                const user = result.user;
+                console.log(`RESULT ${JSON.stringify(result)}`);
+            })
+            .catch(error => {
+                this.setState({ error: error }, () => {
+                    console.log(error);
+                });
+            });
+    };
+
     render() {
         // redirect to app home page on successful sign up
         if (this.state.toAppHome) {
@@ -120,9 +137,9 @@ class LogIn extends Component {
                 <FormFields
                     signUp={this.handleSignUp}
                     newInput={this.handleNewInput}
-                    logIn={this.handleLogIn}
+                    logIn={this.handleLogInWithEmail}
                 />
-                <ThirdPartyLogIn />
+                <ThirdPartyLogIn googleSignIn={this.handleLogInWithGoogle} />
             </div>
         );
     }
