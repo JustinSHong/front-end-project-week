@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
+// firebase
+import { auth } from "../firebase";
 // actions
 import { setVisibilityFilter } from "../actions/index";
 // filter types
@@ -31,6 +33,17 @@ const styles = theme => ({
 });
 
 class ControlPanel extends Component {
+    handleSignOut = () => {
+        console.log("MADE IT TO HANDLESIGN OUT");
+        auth.doSignOut()
+            .then(() => {
+                console.log("SIGN OUT SUCCESS");
+            })
+            .catch(() => {
+                console.log("error signing out");
+            });
+    };
+
     render() {
         const { classes } = this.props;
 
@@ -101,6 +114,7 @@ class ControlPanel extends Component {
                 variant="contained"
                 className={classes.button}
                 style={{ backgroundColor: "#f44336" }}
+                onClick={this.handleSignOut}
             >
                 Sign Out
             </Button>
