@@ -99,6 +99,7 @@ class LogIn extends Component {
         e.preventDefault();
     };
 
+    // TODO implement log in
     handleLogInWithEmail = e => {
         const { email, password } = this.state;
         const userDetails = {
@@ -128,6 +129,7 @@ class LogIn extends Component {
                 const user = result.user;
                 console.log(`token ${token}`);
                 console.log(`user ${JSON.stringify(user)}`);
+                this.setState({ toAppHome: true });
             })
             .catch(error => {
                 this.setState({ error: error }, () => {
@@ -144,6 +146,7 @@ class LogIn extends Component {
                 const user = result.user;
                 console.log(`token ${token}`);
                 console.log(`user ${JSON.stringify(user)}`);
+                this.setState({ toAppHome: true });
             })
             .catch(error => {
                 this.setState({ error: error }, () => {
@@ -160,6 +163,7 @@ class LogIn extends Component {
                 const user = result.user;
                 console.log(`token ${token}`);
                 console.log(`user ${JSON.stringify(user)}`);
+                this.setState({ toAppHome: true });
             })
             .catch(error => {
                 this.setState({ error: error }, () => {
@@ -176,6 +180,7 @@ class LogIn extends Component {
                 const user = result.user;
                 console.log(`token ${token}`);
                 console.log(`user ${JSON.stringify(user)}`);
+                this.setState({ toAppHome: true });
             })
             .catch(error => {
                 this.setState({ error: error }, () => {
@@ -186,23 +191,25 @@ class LogIn extends Component {
 
     render() {
         // redirect to app home page on successful sign up
-        if (this.state.toAppHome) {
-            <Redirect to="/" />;
-        }
-
         return (
             <div className="LogInContainer">
-                <FormFields
-                    signUp={this.handleSignUp}
-                    newInput={this.handleNewInput}
-                    logIn={this.handleLogInWithEmail}
-                />
-                <ThirdPartyLogIn
-                    googleSignIn={this.handleLogInWithGoogle}
-                    facebookSignIn={this.handleLogInWithFacebook}
-                    twitterSignIn={this.handleLogInWithTwitter}
-                    githubSignIn={this.handleLogInWithGithub}
-                />
+                {this.state.toAppHome ? (
+                    <Redirect to="/" />
+                ) : (
+                    <React.Fragment>
+                        <FormFields
+                            signUp={this.handleSignUp}
+                            newInput={this.handleNewInput}
+                            logIn={this.handleLogInWithEmail}
+                        />
+                        <ThirdPartyLogIn
+                            googleSignIn={this.handleLogInWithGoogle}
+                            facebookSignIn={this.handleLogInWithFacebook}
+                            twitterSignIn={this.handleLogInWithTwitter}
+                            githubSignIn={this.handleLogInWithGithub}
+                        />
+                    </React.Fragment>
+                )}
             </div>
         );
     }

@@ -17,12 +17,27 @@ import Todo from "./components/Todo";
 import EditTodoForm from "./components/EditTodoForm";
 import VisibilityTodos from "./components/VisibilityTodos";
 
+const Home = () => {
+    return (
+        <div className="App fade">
+            <div className="ControlPanel">
+                <ControlPanel />
+            </div>
+            <div className="TodoContainer">
+                <VisibilityTodos />
+                <Route exact path="/addTodo" component={CreateTodoForm} />
+                <Route exact path="/todo/:id" component={Todo} />
+                <Route exact path="/editTodo/:id" component={EditTodoForm} />
+            </div>
+        </div>
+    );
+};
+
 class App extends Component {
     componentDidMount() {
         // monitor changes in an user's auth status
         firebase.auth.onAuthStateChanged(authUser => {
-            console.log("AUTH USER OBJECT CHANGED");
-            authUser ? <Redirect to="/" /> : <Redirect to="/auth" />;
+            return authUser.uid ? <Redirect to="/" /> : <Redirect to="/auth" />;
         });
     }
 
@@ -32,28 +47,9 @@ class App extends Component {
         return (
             <div className="App fade">
                 <Route exact path="/auth" component={Auth} />
+                <Route exact path="/" component={Home} />
 
-                {authenticated ? (
-                    <div className="App fade">
-                        <div className="ControlPanel">
-                            <ControlPanel />
-                        </div>
-                        <div className="TodoContainer">
-                            <Route exact path="/" component={VisibilityTodos} />
-                            <Route
-                                exact
-                                path="/addTodo"
-                                component={CreateTodoForm}
-                            />
-                            <Route exact path="/todo/:id" component={Todo} />
-                            <Route
-                                exact
-                                path="/editTodo/:id"
-                                component={EditTodoForm}
-                            />
-                        </div>
-                    </div>
-                ) : null}
+                {authenticated ? <Redirect to="/" /> : <Redirect to="/auth" />}
             </div>
         );
     }
